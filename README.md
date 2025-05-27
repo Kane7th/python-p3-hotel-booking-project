@@ -20,7 +20,7 @@ A Python-based hotel booking system using SQLAlchemy, Alembic, and Faker. This p
 
 ## 🛠 Tech Stack
 
-- Python 3.8
+- Python 3.12
 - SQLAlchemy
 - Alembic
 - Faker
