@@ -14,6 +14,7 @@ pytest = "*"
 pytest-cov = "*"
 pytest-mock = "*"
 python-dotenv = "*"
+click = "*"
 
 [dev-packages]
 
