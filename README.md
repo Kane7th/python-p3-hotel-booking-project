@@ -155,6 +155,7 @@ pytest
 - Ensure **SQLite** is configured correctly.
 - **Alembic** manages version-controlled migrations.
 - **Faker** is used to populate the database for testing.
+- **DB schema** can be viewed here: https://dbdiagram.io/d/hotel-bookings-project-68344b740240c65c443bddb7
 
 ---
 
