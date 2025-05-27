@@ -34,41 +34,37 @@ A Python-based hotel booking system using SQLAlchemy, Alembic, and Faker. This p
 
 ### 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/hotel-booking-system.git
+git clone git@github.com:Kane7th/python-p3-hotel-booking-project.git
 cd hotel-booking-system
-```
-
-### 2. Install dependencies with Pipenv:
-```bash
+2. Install dependencies with Pipenv:
+bash
+Copy
+Edit
 pipenv install
-```
-
-### 3. Activate the virtual environment:
-```bash
+3. Activate the virtual environment:
+bash
+Copy
+Edit
 pipenv shell
-```
-
-### 4. Setup the database:
-```bash
+4. Setup the database:
+bash
+Copy
+Edit
 alembic upgrade head
-```
-
-### 5. (Optional) Seed the database with fake data:
-```bash
+5. (Optional) Seed the database with fake data:
+bash
+Copy
+Edit
 python seed.py
-```
-
----
-
-## ✅ Running Tests
-```bash
+✅ Running Tests
+bash
+Copy
+Edit
 pytest
-```
-
----
-
-## 📁 Project Structure
-```
+📁 Project Structure
+markdown
+Copy
+Edit
 .
 ├── models/
 │   ├── __init__.py
@@ -83,17 +79,13 @@ pytest
 ├── README.md
 └── tests/
     ├── test_models.py
-```
+📌 Notes
+Ensure SQLite is configured.
 
----
+Alembic is used for version-controlling database schema.
 
-## 📌 Notes
-- Ensure PostgreSQL or SQLite is configured if applicable.
-- Alembic is used for version-controlling database schema.
-- Faker can populate test databases with realistic-looking data.
+Faker can populate test databases with realistic-looking data.
 
----
-
-## 👤 Author
-**Kane Kabena**  
+👤 Author
+Kane Kabena
 Email: onekaneldn@gmail.com
