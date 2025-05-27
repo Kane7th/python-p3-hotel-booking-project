@@ -5,6 +5,15 @@ name = "pypi"
 
 [packages]
 ipdb = "*"
+sqlalchemy = "*"
+alembic = "*"
+faker = "*"
+ipython = "*"
+tabulate = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-mock = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
