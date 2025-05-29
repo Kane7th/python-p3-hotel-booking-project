@@ -14,15 +14,46 @@ class Room(Base):
     is_available = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    hotel = relationship("Hotel", back_populates="rooms")
+    hotel = relationship(
+        "Hotel", 
+        back_populates="rooms",
+        )
+
+    guest_rooms = relationship(
+        "GuestRoom",
+        back_populates="room",
+        cascade="all, delete-orphan",
+        overlaps="guests"
+    )
+
     guests = relationship(
         "Guest",
         secondary="guest_rooms",
         back_populates="rooms",
-        overlaps="guest_rooms,rooms"
+        overlaps="guest_rooms,room"
     )
-    guest_rooms = relationship(
-        "GuestRoom",
-        back_populates="room",
-        overlaps="guests,rooms"
-    )
+
+    @classmethod
+    def create(cls, session, hotel_id, room_number, room_type=None, price=None):
+        room = cls(
+            hotel_id=hotel_id,
+            room_number=room_number,
+            room_type=room_type,
+            price=price,
+            is_available=True
+        )
+        session.add(room)
+        session.commit()
+        return room
+
+    @classmethod
+    def find_by_id(cls, session, room_id):
+        return session.query(cls).filter_by(id=room_id).one_or_none()
+
+    @classmethod
+    def get_all(cls, session):
+        return session.query(cls).all()
+
+    def delete(self, session):
+        session.delete(self)
+        session.commit()

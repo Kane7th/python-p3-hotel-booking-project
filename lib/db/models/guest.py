@@ -13,15 +13,39 @@ class Guest(Base):
     phone = Column(String(20))
     created_at = Column(DateTime, default=datetime.utcnow)
 
+    guest_rooms = relationship(
+        "GuestRoom",
+        back_populates="guest",
+        cascade="all, delete-orphan",
+        overlaps="rooms",
+    )
+
     rooms = relationship(
         "Room",
         secondary="guest_rooms",
         back_populates="guests",
-        overlaps="guest_rooms,guests"
+        overlaps="guest_rooms,guest"
     )
 
-    guest_rooms = relationship(
-        "GuestRoom", 
-        back_populates="guest", 
-        overlaps="rooms,guests"
-    )
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
+    @classmethod
+    def create(cls, session, first_name, last_name, email, phone=None):
+        guest = cls(first_name=first_name, last_name=last_name, email=email, phone=phone)
+        session.add(guest)
+        session.commit()
+        return guest
+
+    @classmethod
+    def find_by_id(cls, session, guest_id):
+        return session.query(cls).filter_by(id=guest_id).one_or_none()
+
+    @classmethod
+    def get_all(cls, session):
+        return session.query(cls).all()
+
+    def delete(self, session):
+        session.delete(self)
+        session.commit()

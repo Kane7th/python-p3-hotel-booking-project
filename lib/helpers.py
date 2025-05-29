@@ -1,9 +1,12 @@
+import click
+from sqlalchemy.exc import NoResultFound
+from sqlalchemy.orm import Session
+
 from lib.db.models import session
 from lib.db.models.hotel import Hotel
 from lib.db.models.room import Room
 from lib.db.models.guest import Guest
 from lib.db.models.guest_room import GuestRoom
-from sqlalchemy.exc import NoResultFound
 
 def list_hotels():
     hotels = session.query(Hotel).all()
@@ -90,6 +93,26 @@ def cancel_booking(guest_id, room_id):
     except Exception as e:
         session.rollback()
         print(f"Cancellation failed: {e}")
+
+def create_guest(session: Session):
+    first = click.prompt("Enter first name")
+    last = click.prompt("Enter last name")
+    email = click.prompt("Enter email")
+    phone = click.prompt("Enter phone", default="")
+    try:
+        Guest.create(session, first, last, email, phone)
+        click.echo("Guest created successfully!")
+    except Exception as e:
+        click.echo(f"Error creating guest: {e}")
+
+def delete_guest(session: Session):
+    guest_id = click.prompt("Enter Guest ID to delete", type=int)
+    guest = Guest.find_by_id(session, guest_id)
+    if guest:
+        guest.delete(session)
+        click.echo("Guest deleted successfully!")
+    else:
+        click.echo("Guest not found.")
 
 def exit_cli():
     print("Goodbye!")
