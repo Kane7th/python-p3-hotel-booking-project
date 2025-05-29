@@ -114,6 +114,57 @@ def delete_guest(session: Session):
     else:
         click.echo("Guest not found.")
 
+def find_guest(session, identifier):
+    try:
+        guest_id = int(identifier)
+        guest = Guest.find_by_id(session, guest_id)
+        if guest:
+            return [guest]
+    except ValueError:
+        pass
+    return Guest.find_by_name(session, identifier)
+
+def find_hotel(session, identifier):
+    try:
+        hotel_id = int(identifier)
+        hotel = Hotel.find_by_id(session, hotel_id)
+        if hotel:
+            return [hotel]
+    except ValueError:
+        pass
+    return Hotel.find_by_name(session, identifier)
+
+def find_room(session, identifier):
+    try:
+        room_id = int(identifier)
+        room = Room.find_by_id(session, room_id)
+        if room:
+            return [room]
+    except ValueError:
+        pass
+    # fallback by room_number substring match
+    return session.query(Room).filter(Room.room_number.ilike(f"%{identifier}%")).all()
+
+def list_rooms_with_status(session, hotel):
+    print(f"\nRooms in hotel '{hotel.name}':")
+    for room in hotel.rooms:
+        booked = len(room.guest_rooms) > 0
+        status = "Booked" if booked else "Vacant"
+        print(f"Room {room.room_number} ({room.room_type}) - {status}")
+
+def list_all_guests_with_bookings(session):
+    guests = session.query(Guest).all()
+    for guest in guests:
+        print(f"Guest: {guest.first_name} {guest.last_name} (ID: {guest.id})")
+        if guest.guest_rooms:
+            for booking in guest.guest_rooms:
+                room = booking.room
+                hotel = room.hotel
+                date = booking.booking_date.strftime("%Y-%m-%d")
+                print(f"  Booked Room {room.room_number} at {hotel.name} on {date}")
+        else:
+            print("  No bookings")
+
 def exit_cli():
     print("Goodbye!")
     exit()

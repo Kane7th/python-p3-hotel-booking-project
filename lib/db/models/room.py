@@ -49,6 +49,17 @@ class Room(Base):
     @classmethod
     def find_by_id(cls, session, room_id):
         return session.query(cls).filter_by(id=room_id).one_or_none()
+    
+    @classmethod
+    def find_by_number_or_id(cls, session, identifier):
+        try:
+            room_id = int(identifier)
+            room = session.query(cls).filter_by(id=room_id).one_or_none()
+            if room:
+                return [room]
+        except ValueError:
+            # fallback search by room_number (or partial)
+            return session.query(cls).filter(cls.room_number.ilike(f"%{identifier}%")).all()
 
     @classmethod
     def get_all(cls, session):

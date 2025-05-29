@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, or_
 from sqlalchemy.orm import relationship
 from . import Base
 from datetime import datetime
@@ -41,6 +41,12 @@ class Guest(Base):
     @classmethod
     def find_by_id(cls, session, guest_id):
         return session.query(cls).filter_by(id=guest_id).one_or_none()
+    
+    @classmethod
+    def find_by_name(cls, session, name):
+        return session.query(cls).filter(
+        (cls.first_name.ilike(f"%{name}%")) | (cls.last_name.ilike(f"%{name}%"))
+        ).all()
 
     @classmethod
     def get_all(cls, session):

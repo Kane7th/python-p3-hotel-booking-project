@@ -25,6 +25,10 @@ class Hotel(Base):
     @classmethod
     def find_by_id(cls, session, hotel_id):
         return session.query(cls).filter_by(id=hotel_id).one_or_none()
+    
+    @classmethod
+    def find_by_name(cls, session, name):
+        return session.query(cls).filter(cls.name.ilike(f"%{name}%")).all()
 
     @classmethod
     def get_all(cls, session):
