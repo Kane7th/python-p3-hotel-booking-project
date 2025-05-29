@@ -58,7 +58,7 @@ Defined using SQLAlchemy ORM with clear relationships:
 
 1. Run the CLI:
    ```bash
-   python cli.py
+   lib/cli.py
    ```
 
 2. Use the interactive menu to:
@@ -91,7 +91,6 @@ Defined using SQLAlchemy ORM with clear relationships:
 - Faker
 - Tabulate
 - IPython / ipdb
-- Pytest + pytest-mock
 
 ---
 
@@ -120,12 +119,7 @@ alembic upgrade head
 
 ### 5. (Optional) Seed the Database with Fake Data
 ```bash
-python seed.py
-```
-
-### ✅ Run Tests
-```bash
-pytest
+seed.py
 ```
 
 ---
@@ -137,15 +131,18 @@ pytest
 │   ├── __init__.py
 │   ├── customer.py
 │   ├── room.py
-│   ├── booking.py
+│   ├── hotel.py
+│   ├── guest_room.py
 ├── seed.py
+├── debug.py
+├── cli.py
+├── helpers.py
 ├── alembic/
 ├── alembic.ini
 ├── Pipfile
 ├── Pipfile.lock
 ├── README.md
-└── tests/
-    ├── test_models.py
+
 ```
 
 ---
