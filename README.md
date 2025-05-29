@@ -126,13 +126,13 @@ seed.py
 
 ## 📁 Project Structure
 ```
-db/ (ROOT)
-├── models/
-│   ├── __init__.py
-│   ├── customer.py
-│   ├── room.py
-│   ├── hotel.py
-│   ├── guest_room.py
+├── db/
+   ├── models/
+   │   ├── __init__.py
+   │   ├── customer.py
+   │   ├── room.py
+   │   ├── hotel.py
+   │   ├── guest_room.py
 ├── seed.py
 ├── debug.py
 ├── cli.py
