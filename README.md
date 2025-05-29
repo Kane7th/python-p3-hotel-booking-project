@@ -126,7 +126,7 @@ seed.py
 
 ## 📁 Project Structure
 ```
-.
+db/ (ROOT)
 ├── models/
 │   ├── __init__.py
 │   ├── customer.py
