@@ -1,7 +1,13 @@
 # 🏨 Hotel Booking System
 
-A **Python-based hotel booking system** using **SQLAlchemy**, **Alembic**, and **Faker**. This project models hotel entities such as customers, rooms, and bookings. It also supports testing, mock data generation, and database migrations.
+A Python-based hotel booking system using SQLAlchemy, Alembic, and Faker.
 
+🎬 Watch the Demo  
+[![Watch the video](https://img.youtube.com/vi/WrYNyjDwBYI/maxresdefault.jpg)](https://youtu.be/WrYNyjDwBYI)
+
+This CLI-based application models hotel entities such as customers, rooms, and bookings. It supports bookings, cancellations, user management, mock data generation, and schema migrations.
+
+> View full project walkthrough & code breakdown on YouTube.
 ---
 
 ## 📋 Overview of Key Files and Functions
